@@ -30,12 +30,13 @@ const displaySavedQuotes = () => {
 // Function to fetch a new quote
 const fetchQuote = async () => {
     try {
-        const response = await fetch('https://zenquotes.io/api/random');
+        // Use the Quotable API to fetch a random quote
+        const response = await fetch('https://api.quotable.io/random');
         const data = await response.json();
         
         // Set quote text and author
-        quoteText.textContent = `"${data[0].q}"`;
-        authorText.textContent = `- ${data[0].a}`;
+        quoteText.textContent = `"${data.content}"`;  // content comes from Quotable API
+        authorText.textContent = `- ${data.author}`;  // author comes from Quotable API
     } catch (error) {
         console.error('Error fetching quote:', error);
         quoteText.textContent = "Oops! Something went wrong. Please try again later.";
